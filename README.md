@@ -1,127 +1,64 @@
-# COM6516 Statistical Language Model
+# Statistical Language Model in Java
 
-## Overview
+A Java Swing coursework application for **COM6516 Object Oriented Programming**. It builds unigram, bigram, and trigram frequency tables from a text file, displays vocabulary and hash-table statistics, and generates text by repeatedly selecting the most frequent continuation.
 
-This project is a Java-based implementation of a Statistical Language Model, developed for the COM6516 module. It demonstrates the fundamental concepts of Natural Language Processing (NLP) by building N-gram models (Unigrams, Bigrams, Trigrams) from scratch.
+The project explores how custom hash tables, collision chains, and hash-function choices affect a small language-model application.
 
-Unlike standard applications, this project implements custom data structures (**Hash Table** and **Linked List**) without relying on the Java Collections Framework, providing a deep dive into algorithmic efficiency and data structure design.
+## Features
 
----
+- Custom array-backed hash tables with alphabetically ordered linked collision chains.
+- Two selectable hashing strategies: polynomial hashing and first-letter hashing.
+- Vocabulary sorting by word or frequency.
+- A histogram of unigram collision-chain lengths and summary statistics.
+- Bigram and trigram text continuation, adding up to 20 words when matching contexts exist.
+- Input checking that accepts lowercase letters, periods, and apostrophes after lowercasing, and skips invalid whitespace-delimited tokens.
 
-## 🚀 How to Run
+The n-gram storage is implemented in `MyHashTable` and `MyLinkedObject`. The GUI and statistics code also use Java collections, including `ArrayList` and `TreeMap`.
 
-This application is a standalone Java Swing application. No external libraries are required.
+## Build and run
 
-### Prerequisites
+Use JDK 17 or later, as specified in the original project instructions, and a desktop environment capable of displaying Swing windows. No external Java libraries are required.
 
-* Java Development Kit (JDK) 17 or higher
-
-### Compilation & Execution
-
-Navigate to the `code` directory in your terminal and run the following commands:
+From the repository root:
 
 ```bash
-# 1. Compile all Java files
-javac *.java
-
-# 2. Run the main application
-java MyLanguageModel
+mkdir -p build
+javac -d build code/*.java
+java -cp build MyLanguageModel
 ```
 
----
+1. Keep **Polynomial Hash** selected for an initial run.
+2. Click **Load news.txt** and select a text file in the file chooser. The repository's sample is `news.txt` at the root.
+3. Inspect the vocabulary table, sort controls, histogram, and statistics.
+4. Enter at least one word for **Predict (Bigram)** or at least two words for **Predict (Trigram)**.
+5. To compare hash functions, change the selector and load the file again. The selected strategy is applied when the file is loaded.
 
-## ⚠️ Important Note: Performance Warning
+The repository also contains historical `.class` files. The commands above compile from source into a separate directory and avoid depending on those binaries.
 
-### First Letter Hash Function
+## How prediction works
 
-The application includes a "First Letter Hash" option to demonstrate the impact of poor hash functions.
+For a given one-word or two-word context, the application scans the relevant n-gram table and selects the continuation with the largest observed count. It repeats until 20 words have been added or no continuation is found.
 
-**Behavior**
+This is a deterministic frequency-based demonstration. It does not implement neural modeling, smoothing, random sampling, or a held-out evaluation pipeline.
 
-* When loading `news.txt` with "First Letter Hash" selected, the application may appear to freeze or become unresponsive for 1–2 minutes.
+## Repository map
 
-**Reason**
+| Path | Purpose |
+| --- | --- |
+| `code/MyLanguageModel.java` | Swing UI, file processing, statistics, and text continuation |
+| `code/MyHashTable.java` | Bucket array and frequency-table operations |
+| `code/MyLinkedObject.java` | Linked collision chains and counts |
+| `code/MyHashFunction.java` | Base class for hash strategies |
+| `code/PolynomialHashFunction.java` | Polynomial recurrence `h = 31 * h + c` |
+| `code/FirstLetterHashFunction.java` | First-character hashing for comparison |
+| `code/HistogramPanel.java` | Collision-distribution display |
+| `news.txt` | Existing sample corpus |
+| `assignment.pdf` | Original coursework brief |
 
-* This is normal and expected behavior.
-* The algorithm intentionally clusters thousands of words starting with the same letter (e.g., `t`, `s`) into single linked lists.
-* Inserting thousands of items into a sorted linked list has a time complexity of **O(N²)**, causing significant processing delay.
+See [design notes and behavior limits](docs/DESIGN.md) for the data structures, performance tradeoffs, and interpretation of the displayed statistics.
 
-**Action**
+## Performance and scope
 
-* Please wait patiently until the status bar updates to "Loaded".
-* Do not force close the application.
+First-letter hashing places words beginning with the same character in the same bucket. Long chains make insertion and lookup slower, and loading runs on Swing's UI thread, so a large file can make the window temporarily unresponsive. Runtime depends on the corpus and hardware; this repository does not contain benchmark evidence for a fixed loading time or guaranteed constant-time behavior.
 
-**Contrast**
-
-* This behavior contrasts with the Polynomial Hash, which loads instantly due to efficient **O(1)** distribution.
-
----
-
-## ✨ Key Features
-
-### 1. Custom Data Structures
-
-* **MyHashTable**
-  A custom implementation of a hash table handling collision via chaining.
-
-* **MyLinkedObject**
-  A custom linked list node that stores word frequencies.
-
-**Design Note**
-
-This class uses an Iterative approach (loops) instead of Recursion. This was a deliberate design choice to prevent `StackOverflowError` when handling the extreme chain lengths (depth > 4000) produced by the First Letter Hash.
-
----
-
-### 2. Hash Function Strategy
-
-Users can switch strategies at runtime to compare efficiency:
-
-* **Polynomial Hash**
-  Uses a rolling hash algorithm:
-
-  [ h = 31h + c ]
-
-* **First Letter Hash**
-  Uses the first character:
-
-  [ h = \text{char}[0] % \text{size} ]
-
----
-
-### 3. Visualization (HistogramPanel)
-
-* A custom-painted Swing component that visualizes the internal state of the Hash Table.
-* Displays the distribution of collision chain lengths.
-* Allows visual verification of the "Avalanche Effect" (or lack thereof).
-
----
-
-### 4. N-Gram Prediction
-
-* **Bigram & Trigram Models**
-  The system builds statistical models to predict the next word in a sequence based on conditional probabilities.
-
-* **GUI**
-  Users can input a starting phrase (e.g., `"it is"`) and generate a sequence of up to 20 likely following words.
-
----
-
-## 📂 Project Structure
-
-```
-MyLanguageModel.java        # Main entry point and GUI controller
-MyHashTable.java            # Core data structure managing buckets
-MyLinkedObject.java         # Node structure for collision chains
-MyHashFunction.java         # Abstract base class for hashing strategies
-PolynomialHashFunction.java # Efficient implementation
-FirstLetterHashFunction.java# Inefficient implementation for comparison
-HistogramPanel.java         # Custom component for drawing statistical graphs
-```
-
----
-
-## 👤 Author
-
-* **Student Name:** Yongjiang Liu
-* **Module:** COM6516 Object Oriented Programming
+The project is preserved as coursework by **Yongjiang Liu**. The included assignment brief and corpus retain their original provenance; no repository-wide license is included.
