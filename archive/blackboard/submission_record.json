@@ -1,0 +1,130 @@
+{
+  "course": "COM6516",
+  "blackboard_course_id": "_123528_1",
+  "assessment": "Programming Assignment",
+  "blackboard_content_id": "_8474405_1",
+  "attempt_id": "_12145433_1",
+  "attempt": 1,
+  "submitted_at_display": "17/12/2025 17:17 (UTC+8)",
+  "submission_state": "submitted",
+  "downloaded_file": "elp25aai.zip",
+  "bytes": 1133110,
+  "sha256": "bdbb9e6fd579ad0c393ec5233dd937d0008cfd83ec2ac47cd19a21fca187291e",
+  "source_url": "https://vle.shef.ac.uk/ultra/courses/_123528_1/grades/student-submission-view?contentId=_8474405_1&gradeId=_9623638_1&attemptId=_12145433_1",
+  "downloaded_via": "Blackboard Programming Assignment View button and original submitted-attempt attachment download",
+  "local_archive_path": "archive/blackboard/elp25aai.zip",
+  "attachment_count_observed": 1,
+  "access_note": "The assignment content entry displayed Content is not available, but the submitted attempt and original attachment remained accessible through View. Recovery was not blocked by the content-entry status.",
+  "source_code_status": "Archive inspected. All seven submitted Java files match original COMP and pre-integration main after CRLF normalization. Original classes match byte-for-byte. The submitted student report is recovered separately at reports/elp25aai.pdf.",
+  "archived_at_utc": "2026-09-09T10:57:55.872729+00:00",
+  "archive_review": {
+    "reviewed_at_utc": "2026-09-09T11:08:57.919416+00:00",
+    "zip_entries": 18,
+    "files": [
+      {
+        "path": "README.md",
+        "bytes": 3916,
+        "sha256": "c4ee93e0b6f3c8055d2551e9c1b64b3065f16b75c087386a8dc743b330abf8f0"
+      },
+      {
+        "path": "code/FirstLetterHashFunction.class",
+        "bytes": 503,
+        "sha256": "7d59ef8a987b49ad801426611012f001b86729240218fa30ccb176b1dc620df1"
+      },
+      {
+        "path": "code/FirstLetterHashFunction.java",
+        "bytes": 444,
+        "sha256": "20165c41eb5a5c267a4bfe2ce3cc34a3cef7a59f28cae7b367325a6a9b1699f6"
+      },
+      {
+        "path": "code/HistogramPanel.class",
+        "bytes": 4319,
+        "sha256": "451df26914f4dbf24aeb14b0c4c8cc53c177dde0d50fabf21a4a83d457caa36e"
+      },
+      {
+        "path": "code/HistogramPanel.java",
+        "bytes": 3809,
+        "sha256": "87475d5117d6dd26f151c09b0ad24e506244893e5f24ce12b7190fea36774a48"
+      },
+      {
+        "path": "code/MyHashFunction.class",
+        "bytes": 299,
+        "sha256": "c1bb2fa6019cf2a3c102ec623fa3a40d1e709147f51cbbc9fe5b4fe2fab00f03"
+      },
+      {
+        "path": "code/MyHashFunction.java",
+        "bytes": 230,
+        "sha256": "06fa1bb0ca351f9176e45a00fda45b4b789b5e87729c36121565096e8165be73"
+      },
+      {
+        "path": "code/MyHashTable.class",
+        "bytes": 1078,
+        "sha256": "b22f0efd8e81c69af927d261656ca151fc3774524e53ed39794f5af313d271c8"
+      },
+      {
+        "path": "code/MyHashTable.java",
+        "bytes": 1458,
+        "sha256": "c2236bd18f43b18c6c218f64b6e00e68d70d5369107e6445dafa80739e0a51c0"
+      },
+      {
+        "path": "code/MyLanguageModel.class",
+        "bytes": 12200,
+        "sha256": "1f8a2ec3fb208bd15bee715370e4ad4b98fb6bec6158bef88a601eceeef7bb92"
+      },
+      {
+        "path": "code/MyLanguageModel.java",
+        "bytes": 13950,
+        "sha256": "7aff336e7394d1547bd4ca6f4c0eb85ce8884eed3e6167c8d99ad32cb67051c8"
+      },
+      {
+        "path": "code/MyLinkedObject.class",
+        "bytes": 2026,
+        "sha256": "1e98826cd927c53812c9b1f07a64dfd944f9d65eb4b8db40d14d64f015e8c4ee"
+      },
+      {
+        "path": "code/MyLinkedObject.java",
+        "bytes": 2690,
+        "sha256": "69959f4f2b1a6f35c62858a30035e9e1b9af21d3535bb47fa0a09a8c13983261"
+      },
+      {
+        "path": "code/PolynomialHashFunction.class",
+        "bytes": 569,
+        "sha256": "e22b09b703e87e9422281676ada00bba7bcf5e13b2b27fd68c33ec6cfe778bbd"
+      },
+      {
+        "path": "code/PolynomialHashFunction.java",
+        "bytes": 523,
+        "sha256": "973baff47ebdd71f5e5a036e62a106da80f45769708ae666164230b65765dd04"
+      },
+      {
+        "path": "code/news.txt",
+        "bytes": 2207631,
+        "sha256": "c48fc8390750f94c15e30c3ad3b126867fdd262997a62144a160baa8f6b684b0"
+      },
+      {
+        "path": "elp25aai.pdf",
+        "bytes": 373078,
+        "sha256": "52ab32c0464c8a7eec381743005f2b1b123f03bcbfea837e6d37efea053c98a4"
+      }
+    ],
+    "uncompressed_bytes": 2628723,
+    "crc_and_extracted_hashes_verified": true,
+    "source_commit_compared": "4596d8867a7ced9994ec9b2e90e702a61c38f09d",
+    "pre_integration_main": "77be1409b5c595a9b9fa7d7579f4ba2738f6d6ef"
+  },
+  "canonical_report": {
+    "original_zip_member": "elp25aai.pdf",
+    "repository_path": "reports/elp25aai.pdf",
+    "bytes": 373078,
+    "sha256": "52ab32c0464c8a7eec381743005f2b1b123f03bcbfea837e6d37efea053c98a4",
+    "pages": 3,
+    "document_role": "Student final report; distinct from assignment.pdf, the instructor brief."
+  },
+  "retention": {
+    "visibility": "private",
+    "reason": "Complete original classroom submission and report contain course material and student identifiers; public redistribution has not been confirmed.",
+    "original_source_and_binaries": "Preserved without edits.",
+    "original_zip": "Preserved byte-for-byte, including submitted README, corpus, source and compiled classes.",
+    "credential_pattern_review": "No matches in submitted text/source files for private-key, GitHub-token, AWS-access-key or credential-assignment patterns. This is a bounded check, not proof that no secret can exist."
+  }
+}
