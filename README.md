@@ -4,6 +4,8 @@ A Java Swing coursework application for **COM6516 Object Oriented Programming**.
 
 The project explores how custom hash tables, collision chains, and hash-function choices affect a small language-model application.
 
+The officially submitted **17 December 2025** coursework is preserved in this private archive. Read the [student final report](reports/elp25aai.pdf), retrieve the [original submitted ZIP](archive/blackboard/elp25aai.zip), or inspect the [submission and recovery notes](docs/FINAL_SUBMISSION.md). The seven Java source files were verified against the submitted version; only line endings differ.
+
 ## Features
 
 - Custom array-backed hash tables with alphabetically ordered linked collision chains.
@@ -17,13 +19,13 @@ The n-gram storage is implemented in `MyHashTable` and `MyLinkedObject`. The GUI
 
 ## Build and run
 
-Use JDK 17 or later, as specified in the original project instructions, and a desktop environment capable of displaying Swing windows. No external Java libraries are required.
+Use JDK 17 or later, as specified in the submitted README and report, and a desktop environment capable of displaying Swing windows. Compile from source before running; no external Java libraries are required.
 
 From the repository root:
 
 ```bash
 mkdir -p build
-javac -d build code/*.java
+javac --release 17 -d build code/*.java
 java -cp build MyLanguageModel
 ```
 
@@ -33,7 +35,7 @@ java -cp build MyLanguageModel
 4. Enter at least one word for **Predict (Bigram)** or at least two words for **Predict (Trigram)**.
 5. To compare hash functions, change the selector and load the file again. The selected strategy is applied when the file is loaded.
 
-The repository also contains historical `.class` files. The commands above compile from source into a separate directory and avoid depending on those binaries.
+The preserved `.class` files target Java 25 (class-file major version 69) and cannot be loaded by Java 17. The commands above rebuild the source for Java 17 into a separate directory. The archive review verified source identity and binary headers; compilation and GUI execution were not performed during recovery because a working JDK was unavailable.
 
 ## How prediction works
 
@@ -53,7 +55,11 @@ This is a deterministic frequency-based demonstration. It does not implement neu
 | `code/FirstLetterHashFunction.java` | First-character hashing for comparison |
 | `code/HistogramPanel.java` | Collision-distribution display |
 | `news.txt` | Existing sample corpus |
-| `assignment.pdf` | Original coursework brief |
+| `assignment.pdf` | Instructor coursework brief; this is not the student final report |
+| `reports/elp25aai.pdf` | Officially submitted three-page student final report |
+| `archive/blackboard/elp25aai.zip` | Original submitted ZIP, unchanged |
+| `archive/blackboard/submission_record.json` | Blackboard attempt provenance and file checksums |
+| `docs/FINAL_SUBMISSION.md` | Comparison results and archive scope |
 
 See [design notes and behavior limits](docs/DESIGN.md) for the data structures, performance tradeoffs, and interpretation of the displayed statistics.
 
@@ -61,4 +67,4 @@ See [design notes and behavior limits](docs/DESIGN.md) for the data structures, 
 
 First-letter hashing places words beginning with the same character in the same bucket. Long chains make insertion and lookup slower, and loading runs on Swing's UI thread, so a large file can make the window temporarily unresponsive. Runtime depends on the corpus and hardware; this repository does not contain benchmark evidence for a fixed loading time or guaranteed constant-time behavior.
 
-The project is preserved as coursework by **Yongjiang Liu**. The included assignment brief and corpus retain their original provenance; no repository-wide license is included.
+The project is preserved as coursework by **Yongjiang Liu**. It remains private because the complete classroom submission includes course material and student identifiers. The included assignment brief and corpus retain their original provenance; no repository-wide license is included.
