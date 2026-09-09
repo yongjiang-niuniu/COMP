@@ -1,27 +1,51 @@
 # Statistical Language Model in Java
 
-A Java Swing coursework application for **COM6516 Object Oriented Programming**. It builds unigram, bigram, and trigram frequency tables from a text file, displays vocabulary and hash-table statistics, and generates text by repeatedly selecting the most frequent continuation.
+A desktop application for exploring how a text corpus becomes a statistical language model. Load a text file, inspect word frequencies and hash-table collisions, then generate a continuation using the most frequent bigram or trigram matches.
 
-The project explores how custom hash tables, collision chains, and hash-function choices affect a small language-model application.
+中文概述：COM6516 面向对象编程课程项目，用 Java Swing、自定义哈希表和链表实现词频分析、碰撞可视化及二元/三元文本续写，并保留正式提交报告与原始代码。
 
-The officially submitted **17 December 2025** coursework is preserved in this private archive. Read the [student final report](reports/elp25aai.pdf), retrieve the [original submitted ZIP](archive/blackboard/elp25aai.zip), or inspect the [submission and recovery notes](docs/FINAL_SUBMISSION.md). The seven Java source files were verified against the submitted version; only line endings differ.
+[Documentation](docs/README.md) · [Design notes](docs/DESIGN.md) · [Final report](reports/elp25aai.pdf)
 
-## Features
+## Project at a glance
 
-- Custom array-backed hash tables with alphabetically ordered linked collision chains.
-- Two selectable hashing strategies: polynomial hashing and first-letter hashing.
-- Vocabulary sorting by word or frequency.
-- A histogram of unigram collision-chain lengths and summary statistics.
-- Bigram and trigram text continuation, adding up to 20 words when matching contexts exist.
-- Input checking that accepts lowercase letters, periods, and apostrophes after lowercasing, and skips invalid whitespace-delimited tokens.
+| Item | Details |
+| --- | --- |
+| Course | COM6516 Object Oriented Programming and Software Design, University of Sheffield |
+| Project type | Individual coursework; desktop data-structure and language-model demonstration |
+| Technology | Java, Swing and JDK standard libraries |
+| Core structures | Custom hash table, ordered linked collision chains and interchangeable hash functions |
+| Model | Unigram, bigram and trigram frequency tables; deterministic text continuation |
+| Status | Official submission recovered and source identity verified; no new compilation or GUI run claimed |
 
-The n-gram storage is implemented in `MyHashTable` and `MyLinkedObject`. The GUI and statistics code also use Java collections, including `ArrayList` and `TreeMap`.
+## What it does
 
-## Build and run
+- Loads a text corpus and counts accepted words, word pairs and word triples.
+- Compares polynomial hashing with first-letter hashing using the same input.
+- Lists unigram vocabulary and sorts it alphabetically or by descending frequency.
+- Visualises unigram collision-chain lengths and displays bucket statistics.
+- Extends a prompt by up to 20 words, choosing the highest-count continuation at each step.
 
-Use JDK 17 or later, as specified in the submitted README and report, and a desktop environment capable of displaying Swing windows. Compile from source before running; no external Java libraries are required.
+This is a frequency-based teaching application. It provides a way to inspect data structures and simple prediction behavior; it does not train a neural language model.
 
-From the repository root:
+## Repository guide
+
+| Path | Purpose |
+| --- | --- |
+| [code/MyLanguageModel.java](code/MyLanguageModel.java) | Application entry point, Swing interface, corpus processing, statistics and prediction |
+| [code/MyHashTable.java](code/MyHashTable.java), [code/MyLinkedObject.java](code/MyLinkedObject.java) | Bucket array, ordered linked chains and frequency counts |
+| [code/MyHashFunction.java](code/MyHashFunction.java) | Abstract hash strategy, implemented by [polynomial](code/PolynomialHashFunction.java) and [first-letter](code/FirstLetterHashFunction.java) hashing |
+| [code/HistogramPanel.java](code/HistogramPanel.java) | Collision-distribution display |
+| [news.txt](news.txt) | Preserved sample corpus, selected through the file chooser |
+| [docs/](docs/README.md) | Design, interpretation of statistics and submission provenance |
+| [reports/elp25aai.pdf](reports/elp25aai.pdf) | Three-page student final report |
+| [archive/blackboard/](archive/blackboard/) | Unchanged submitted ZIP and original-file checksums |
+| [assignment.pdf](assignment.pdf) | Instructor coursework brief, separate from the student report |
+
+## Getting started
+
+Use **JDK 17 or later**, as specified by the submitted README/report, and a desktop environment that can display Swing windows. No external Java libraries or build framework are required.
+
+Compile the source from the repository root:
 
 ```bash
 mkdir -p build
@@ -29,42 +53,44 @@ javac --release 17 -d build code/*.java
 java -cp build MyLanguageModel
 ```
 
-1. Keep **Polynomial Hash** selected for an initial run.
-2. Click **Load news.txt** and select a text file in the file chooser. The repository's sample is `news.txt` at the root.
-3. Inspect the vocabulary table, sort controls, histogram, and statistics.
-4. Enter at least one word for **Predict (Bigram)** or at least two words for **Predict (Trigram)**.
-5. To compare hash functions, change the selector and load the file again. The selected strategy is applied when the file is loaded.
+The inherited `.class` files in `code/` target **Java 25**. The commands above create a separate Java 17-targeted build, leaving those original binaries unchanged. Compilation and GUI execution were not performed during the recovery or this documentation refresh; these are the documented source-build instructions, not a claim of a newly tested runtime.
 
-The preserved `.class` files target Java 25 (class-file major version 69) and cannot be loaded by Java 17. The commands above rebuild the source for Java 17 into a separate directory. The archive review verified source identity and binary headers; compilation and GUI execution were not performed during recovery because a working JDK was unavailable.
+1. Keep **Polynomial Hash** selected and click **Load news.txt**. Select the root `news.txt` file, or another text corpus.
+2. Review the vocabulary, sorting controls, histogram and statistics.
+3. Enter at least one word for **Predict (Bigram)** or two words for **Predict (Trigram)**.
+4. To compare hash strategies, change the selector and reload the corpus. The selected strategy is applied during loading.
 
-## How prediction works
+The input processor lowercases text and accepts tokens made of `a`–`z`, periods and apostrophes. Other whitespace-delimited tokens are skipped, with a warning for the first invalid token. Loading a large corpus can temporarily block the interface.
 
-For a given one-word or two-word context, the application scans the relevant n-gram table and selects the continuation with the largest observed count. It repeats until 20 words have been added or no continuation is found.
+## Design and method
 
-This is a deterministic frequency-based demonstration. It does not implement neural modeling, smoothing, random sampling, or a held-out evaluation pipeline.
+Three custom tables store unigram, bigram and trigram counts, each with **5,000 buckets**. Colliding keys form alphabetically ordered linked chains. Repeated keys increment their counts; the hash strategy can be exchanged without changing the table interface.
 
-## Repository map
+Polynomial hashing combines characters using `h = 31 * h + c`; first-letter hashing uses only the first character and deliberately exposes concentrated collisions. GUI and statistics code also use Java collections, including `ArrayList` and `TreeMap`; custom structures are used for the n-gram storage.
 
-| Path | Purpose |
+For prediction, the application scans the relevant n-gram table for the current context and picks its highest-count continuation. It repeats until 20 words have been added or no match exists. Ties retain the first encountered candidate. [Design notes](docs/DESIGN.md) explain token boundaries, traversal costs, sorting and the displayed statistics.
+
+## Results and verification
+
+| Evidence | What it establishes |
 | --- | --- |
-| `code/MyLanguageModel.java` | Swing UI, file processing, statistics, and text continuation |
-| `code/MyHashTable.java` | Bucket array and frequency-table operations |
-| `code/MyLinkedObject.java` | Linked collision chains and counts |
-| `code/MyHashFunction.java` | Base class for hash strategies |
-| `code/PolynomialHashFunction.java` | Polynomial recurrence `h = 31 * h + c` |
-| `code/FirstLetterHashFunction.java` | First-character hashing for comparison |
-| `code/HistogramPanel.java` | Collision-distribution display |
-| `news.txt` | Existing sample corpus |
-| `assignment.pdf` | Instructor coursework brief; this is not the student final report |
-| `reports/elp25aai.pdf` | Officially submitted three-page student final report |
-| `archive/blackboard/elp25aai.zip` | Original submitted ZIP, unchanged |
-| `archive/blackboard/submission_record.json` | Blackboard attempt provenance and file checksums |
-| `docs/FINAL_SUBMISSION.md` | Comparison results and archive scope |
+| Official final report | Preserves the submitted design discussion, screenshots, references and disclosure; its descriptions remain historical evidence |
+| Source comparison | All seven submitted Java files match the original and documented repository versions after CRLF line endings are normalised to LF |
+| Original artifacts | The submitted ZIP and report are preserved byte-for-byte; seven inherited class files also match the original repository |
+| Documentation review | Commands, source links and behavioral descriptions checked against the committed implementation; no source changes or additional program tests |
 
-See [design notes and behavior limits](docs/DESIGN.md) for the data structures, performance tradeoffs, and interpretation of the displayed statistics.
+No measured speedup, fixed loading time or predictive-accuracy benchmark is established by this archive. The [submission guide](docs/FINAL_SUBMISSION.md) records dates, hashes, comparison scope and the class-file compatibility finding.
 
-## Performance and scope
+## Limitations
 
-First-letter hashing places words beginning with the same character in the same bucket. Long chains make insertion and lookup slower, and loading runs on Swing's UI thread, so a large file can make the window temporarily unresponsive. Runtime depends on the corpus and hardware; this repository does not contain benchmark evidence for a fixed loading time or guaranteed constant-time behavior.
+- Loading and processing run on Swing's event-dispatch thread, so a long load blocks UI interaction.
+- First-letter hashing can produce long chains; insertion and lookup costs depend on chain length. Prediction scans stored entries rather than performing a constant-time next-word lookup.
+- The UI's **Load Factor** is bucket occupancy, not the conventional distinct-entry load factor. Histogram statistics describe the unigram table only.
+- The model has no smoothing, backoff, random sampling, sentence-boundary handling or held-out evaluation pipeline. Accepted tokens can form n-grams across line breaks and skipped tokens.
+- The submitted archive contains no automated test suite, pinned toolchain or separate benchmark records. The original compiled classes require Java 25 unless rebuilt from source.
 
-The project is preserved as coursework by **Yongjiang Liu**. It remains private because the complete classroom submission includes course material and student identifiers. The included assignment brief and corpus retain their original provenance; no repository-wide license is included.
+## Attribution and provenance
+
+Coursework by **Yongjiang Liu**, officially submitted on **17 December 2025**. The original source, report, corpus, instructor brief and submitted ZIP remain preserved; archive documentation does not replace the original submission.
+
+The instructor brief and corpus retain their original provenance. The repository remains private because it includes complete classroom materials and student identifiers; no repository-wide redistribution license is added. See [Final submission and recovery](docs/FINAL_SUBMISSION.md) for the detailed record.
