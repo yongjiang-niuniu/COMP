@@ -27,4 +27,4 @@ Use the README's `javac --release 17 -d build code/*.java` command to compile so
 
 ## Retention and attribution
 
-This repository preserves Yongjiang Liu's coursework and its original history. Course instructions and the corpus keep their existing provenance; the repository is private and does not grant a repository-wide redistribution license. The original report, including its disclosure and identifiers, is retained without edits. No grades, feedback, quiz answers or unsubmitted drafts were added.
+This repository preserves Yongjiang Liu's coursework and its original history. Course instructions and the corpus keep their existing provenance; no repository-wide redistribution license is added. The original report, including its disclosure and identifiers, is retained without edits. No grades, feedback, quiz answers or unsubmitted drafts were added.

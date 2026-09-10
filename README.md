@@ -93,4 +93,4 @@ No measured speedup, fixed loading time or predictive-accuracy benchmark is esta
 
 Coursework by **Yongjiang Liu**, officially submitted on **17 December 2025**. The original source, report, corpus, instructor brief and submitted ZIP remain preserved; archive documentation does not replace the original submission.
 
-The instructor brief and corpus retain their original provenance. The repository remains private because it includes complete classroom materials and student identifiers; no repository-wide redistribution license is added. See [Final submission and recovery](docs/FINAL_SUBMISSION.md) for the detailed record.
+The instructor brief and corpus retain their original provenance, and the submitted report remains unmodified. No repository-wide redistribution license is added. See [Final submission and recovery](docs/FINAL_SUBMISSION.md) for the detailed record.
