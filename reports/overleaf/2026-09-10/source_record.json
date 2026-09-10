@@ -1,0 +1,38 @@
+{
+  "export_date": "2026-09-10",
+  "source": "PDF downloaded from the owner-authenticated Overleaf report project. Private project identifiers and editor links are omitted.",
+  "version_role": "Separately preserved Overleaf export, not a replacement for the verified submitted report.",
+  "compilation_date_note": "The September 10, 2026 date displayed by this export is not the original coursework completion or submission date.",
+  "file": "reports/overleaf/2026-09-10/COM6516_Language_Model_Report_Overleaf_2026-09-10.pdf",
+  "bytes": 373137,
+  "sha256": "d6c4355eb1137b3513889bc36b5c8611c24d9c4dec62e6835b3a8551334aa6de",
+  "pages": 3,
+  "preservation": "byte-identical copy of the downloaded PDF",
+  "canonical_report": {
+    "path": "reports/elp25aai.pdf",
+    "sha256": "52ab32c0464c8a7eec381743005f2b1b123f03bcbfea837e6d37efea053c98a4",
+    "bytes": 373078,
+    "pages": 3
+  },
+  "comparison": {
+    "byte_identical": false,
+    "same_page_count": true,
+    "pypdf_normalized_full_text_identical": false,
+    "pdfplumber_normalized_full_text_identical": false,
+    "pypdf_normalized_page_matches": [
+      2
+    ],
+    "pdfplumber_normalized_page_matches": [
+      2
+    ],
+    "normalization": "Unicode NFKC then whitespace removal; numbers and punctuation retained. Equality does not by itself prove image/layout identity.",
+    "decoded_page_images_identical": true,
+    "canonical_decoded_images_count": 3,
+    "download_decoded_images_count": 3
+  },
+  "observed_content_differences": [
+    "Title-page date changed from December 17, 2025 to September 10, 2026.",
+    "Page 3 opening wording of the generative-AI usage disclosure was rephrased; the listed examples remain."
+  ],
+  "scope": "Full text extracted with pypdf and pdfplumber; Unicode NFKC/whitespace comparison; decoded images compared per page; selected changed/key pages visually checked. No report edits, experiments or source-code execution."
+}

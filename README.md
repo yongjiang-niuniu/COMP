@@ -6,6 +6,8 @@ A desktop application for exploring how a text corpus becomes a statistical lang
 
 [Documentation](docs/README.md) · [Design notes](docs/DESIGN.md) · [Final report](reports/elp25aai.pdf)
 
+The [Overleaf export of 10 September 2026](reports/overleaf/2026-09-10/COM6516_Language_Model_Report_Overleaf_2026-09-10.pdf) is preserved separately from the original submitted report. Its displayed date is the compilation/export date, and its AI-use explanation contains a small wording change; [version notes](reports/overleaf/2026-09-10/README.md) record the comparison. This export does not change the coursework completion date or replace the official report.
+
 ## Project at a glance
 
 | Item | Details |
